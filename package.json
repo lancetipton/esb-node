@@ -1,11 +1,11 @@
 {
-  "name": "esbuild-node-tsc",
+  "name": "@ltipton/esb-node",
   "description": "Build your Typescript Node.js projects using blazing fast esbuild",
-  "version": "1.8.8",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "bin": {
-    "esbuild-node-tsc": "dist/index.js",
-    "etsc": "dist/index.js"
+    "esbuild-node": "dist/index.js",
+    "esbn": "dist/index.js"
   },
   "type": "module",
   "license": "MIT",
