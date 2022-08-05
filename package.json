@@ -7,6 +7,10 @@
     "esbuild-node": "dist/index.js",
     "esbn": "dist/index.js"
   },
+  "repository": {
+    "url": "git+https://github.com/lancetipton/esb-node.git",
+    "type": "git"
+  },
   "type": "module",
   "license": "MIT",
   "scripts": {
