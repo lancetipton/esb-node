@@ -15,7 +15,7 @@ export type Config = Partial<{
   };
 }>;
 
-export async function readUserConfig(configPath: string): Promise<Config> {
+export async function readUserConfig(configPath: string): Promise<Config | undefined> {
   if (fs.existsSync(configPath)) {
     try {
       return require(configPath);
@@ -25,6 +25,6 @@ export async function readUserConfig(configPath: string): Promise<Config> {
       console.error(e);
     }
   }
-  console.log("Using default config");
-  return {};
+
+  return undefined;
 }

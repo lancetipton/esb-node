@@ -120,10 +120,17 @@ async function copyNonSourceFiles({
   });
 }
 
+async function getConfig():Promise<Config> {
+  const configFilename = <string>(await argv)?.config || `esbn.config.js`
+  const esbnConf = await readUserConfig(path.resolve(cwd, configFilename))
+  const config = esbnConf || await readUserConfig(path.resolve(cwd, `etsc.config.js`)) 
+
+  return config || {}
+}
+
 async function main() {
-  const configFilename = <string>(await argv)?.config || "etsc.config.js";
+  const config = await getConfig();
   const clean = <boolean>(await argv)?.clean || false;
-  const config = await readUserConfig(path.resolve(cwd, configFilename));
 
   const { outDir, esbuildOptions, assetsOptions } = getBuildMetadata(config);
 
