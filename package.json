@@ -1,11 +1,15 @@
 {
   "name": "@ltipton/esb-node",
   "description": "Build your Typescript Node.js projects using blazing fast esbuild",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "bin": {
     "esbuild-node": "dist/index.js",
     "esbn": "dist/index.js"
+  },
+  "repository": {
+    "url": "git+https://github.com/lancetipton/esb-node.git",
+    "type": "git"
   },
   "type": "module",
   "license": "MIT",
