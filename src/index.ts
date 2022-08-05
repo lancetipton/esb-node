@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import ts, { BuildOptions } from "typescript";
+import ts from "typescript";
+import type { BuildOptions } from "esbuild";
 import { build } from "esbuild";
 import cpy from "cpy";
 import path from "path";
@@ -61,16 +62,18 @@ function getBuildMetadata(userConfig: Config) {
 
   const outDir = userConfig.outDir || tsConfig.options.outDir || "dist";
 
-  const esbuildEntryPoints = userConfig.esbuild?.entryPoints || [];
-  const srcFiles = [...tsConfig.fileNames, ...esbuildEntryPoints];
+  const {
+    plugins=[],
+    format=`cjs`,
+    minify=false,
+    entryPoints=[],
+    target:esTarget,
+    ...esBuildOpts
+  } = (userConfig.esbuild || {}) as BuildOptions
+
+  const srcFiles = [...tsConfig.fileNames, ...(entryPoints  as string[])];
   const sourcemap = esBuildSourceMapOptions(tsConfig);
-  const target =
-    userConfig.esbuild?.target ||
-    tsConfig?.raw?.compilerOptions?.target ||
-    "es6";
-  const minify = userConfig.esbuild?.minify || false;
-  const plugins = userConfig.esbuild?.plugins || [];
-  const format = userConfig.esbuild?.format || "cjs";
+  const target = esTarget || tsConfig?.raw?.compilerOptions?.target || "es6";
 
   const esbuildOptions: BuildOptions = {
     outdir: outDir,
@@ -81,6 +84,7 @@ function getBuildMetadata(userConfig: Config) {
     plugins,
     tsconfig: tsConfigFile,
     format,
+    ...esBuildOpts
   };
 
   const assetPatterns = userConfig.assets?.filePatterns || ["**"];

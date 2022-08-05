@@ -1,17 +1,13 @@
 import fs from 'fs'
-import type { Plugin } from "esbuild";
+import type { BuildOptions } from "esbuild";
+
+
 
 export type Config = Partial<{
   outDir: string;
   clean?: boolean;
   tsConfigFile?: string;
-  esbuild: {
-    entryPoints?: string[];
-    minify?: boolean;
-    target?: string;
-    plugins?: Plugin[];
-    format?: "cjs" | "esm";
-  };
+  esbuild: BuildOptions;
   assets: {
     baseDir?: string;
     outDir?: string;
