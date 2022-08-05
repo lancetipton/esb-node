@@ -1,7 +1,7 @@
 {
   "name": "@ltipton/esb-node",
   "description": "Build your Typescript Node.js projects using blazing fast esbuild",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "./dist/index.js",
   "bin": {
     "esbuild-node": "dist/index.js",
